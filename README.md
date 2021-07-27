@@ -35,6 +35,30 @@ jobs:
 To know more about how to schedule actions, read
 [here](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events).
 
+## Local development
+
+This action reads from Github's API and posts to Slack channels. As such, you will need to [set up a Slack
+workspace](https://slack.com/intl/en-ca/help/articles/206845317-Create-a-Slack-workspace) where your instance of the bot
+can post, [give it the permissions it needs](https://api.slack.com/bot-users#installing-bot) (which should only be
+`chat:write`) and grab both your Slack app's [bot token](https://api.slack.com/authentication/token-types#bot) and a
+personal access token with minimal scope (it should only be able to read public repository metadata, unless you are
+reporting on private repositories) from Github.
+
+Using tools such as [act](https://github.com/nektos/act), you can then execute the action and provide the tokens you
+have generated earlier as secret values that Github would otherwise manage.
+
+Finally, you will need to set up a dummy action in `.github/workflows` that triggers the action defined at the root of
+the repository. A dummy action like the one above, but with `uses: ./` instead of `uses: tophat/...`, will allow you to
+run the locally-defined action flow.
+
+With `act`, you can then run
+
+```
+act -s GITHUB_TOKEN=<token> -s SLACK_TOKEN=<token>
+```
+
+at the root of the repository. The action should now run locally!
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
