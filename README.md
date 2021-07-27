@@ -47,7 +47,11 @@ reporting on private repositories) from Github.
 Using tools such as [act](https://github.com/nektos/act), you can then execute the action and provide the tokens you
 have generated earlier as secret values that Github would otherwise manage.
 
-With `act`, this would result in running
+Finally, you will need to set up a dummy action in `.github/workflows` that triggers the action defined at the root of
+the repository. A dummy action like the one above, but with `uses: ./` instead of `uses: tophat/...`, will allow you to
+run the locally-defined action flow.
+
+With `act`, you can then run
 
 ```
 act -s GITHUB_TOKEN=<token> -s SLACK_TOKEN=<token>
