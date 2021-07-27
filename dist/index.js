@@ -13387,20 +13387,6 @@ function getSimpleMarkdownBlock(text) {
         },
     };
 }
-function getMarkdownBlockWithButton(text, url) {
-    return {
-        type: 'section',
-        text: {
-            type: 'mrkdwn',
-            text,
-        },
-        accessory: {
-            type: 'button',
-            text: { type: 'plain_text', text: 'Open' },
-            url,
-        },
-    };
-}
 /*
  * Posts updates to slack as a single thread.
  */
@@ -13421,7 +13407,7 @@ function postToSlack(context, lastWeekIssues, lastWeekPRs) {
         for (const [repoName, issues] of lastWeekIssues.entries()) {
             if (!issues.length)
                 continue;
-            issuesBlocks.push(getSimpleMarkdownBlock(`*${repoName}*`), ...issues.map((issue) => getMarkdownBlockWithButton(issue.title, issue.url)));
+            issuesBlocks.push(getSimpleMarkdownBlock(`*${repoName}*`), ...issues.map((issue) => getSimpleMarkdownBlock(`<${issue.url}|${issue.title}>`)));
         }
         messages.push(issuesBlocks);
         const PRBlocks = [
@@ -13430,7 +13416,7 @@ function postToSlack(context, lastWeekIssues, lastWeekPRs) {
         for (const [repoName, issues] of lastWeekPRs.entries()) {
             if (!issues.length)
                 continue;
-            PRBlocks.push(getSimpleMarkdownBlock(`*${repoName}*`), ...issues.map((issue) => getMarkdownBlockWithButton(issue.title, issue.url)));
+            PRBlocks.push(getSimpleMarkdownBlock(`*${repoName}*`), ...issues.map((issue) => getSimpleMarkdownBlock(`<${issue.url}|${issue.title}>`)));
         }
         messages.push(PRBlocks);
         for (const message of messages) {

@@ -10,21 +10,6 @@ function getSimpleMarkdownBlock(text: string) {
     }
 }
 
-function getMarkdownBlockWithButton(text: string, url: string) {
-    return {
-        type: 'section',
-        text: {
-            type: 'mrkdwn',
-            text,
-        },
-        accessory: {
-            type: 'button',
-            text: { type: 'plain_text', text: 'Open' },
-            url,
-        },
-    }
-}
-
 /*
  * Posts updates to slack as a single thread.
  */
@@ -59,7 +44,7 @@ export default async function postToSlack(
         issuesBlocks.push(
             getSimpleMarkdownBlock(`*${repoName}*`),
             ...issues.map((issue: Issue) =>
-                getMarkdownBlockWithButton(issue.title, issue.url),
+                getSimpleMarkdownBlock(`<${issue.url}|${issue.title}>`),
             ),
         )
     }
@@ -75,7 +60,7 @@ export default async function postToSlack(
         PRBlocks.push(
             getSimpleMarkdownBlock(`*${repoName}*`),
             ...issues.map((issue: Issue) =>
-                getMarkdownBlockWithButton(issue.title, issue.url),
+                getSimpleMarkdownBlock(`<${issue.url}|${issue.title}>`),
             ),
         )
     }
