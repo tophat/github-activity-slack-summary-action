@@ -1,5 +1,6 @@
-import type { Issue, Repository } from './types'
 import { sortIssuesByLastUpdate } from './utils'
+
+import type { Issue, Repository } from './types'
 
 export default function buildRepositorySummariesFromAPIData(
     reposData,
