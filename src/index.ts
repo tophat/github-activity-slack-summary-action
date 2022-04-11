@@ -1,14 +1,14 @@
-import * as github from '@actions/github'
 import * as core from '@actions/core'
+import * as github from '@actions/github'
 import { WebClient } from '@slack/web-api'
 
+import buildRepositorySummariesFromAPIData from './buildSummariesFromAPIData'
+import { fetchOrgRepositoriesData, fetchRepositoryIssuesData } from './github'
+import postToSlack from './slack'
 import {
     getIssuesFromLastWeekByRepository,
     getPRsFromLastWeekByRepository,
 } from './utils'
-import postToSlack from './slack'
-import { fetchOrgRepositoriesData, fetchRepositoryIssuesData } from './github'
-import buildRepositorySummariesFromAPIData from './buildSummariesFromAPIData'
 
 async function openSourceUpdate() {
     // Gather facts from input
