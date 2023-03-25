@@ -3,7 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-> :warning: **This project is now archived and will not receive any more updates.
+> :warning: **This project is now archived and will not receive any more updates.**
 
 Eager to keep your Slack workspace in-the-loop about what's going on in your Github projects? This action might come handy! With minimal setup, this action will post weekly summaries of what has been going on around your Github organization in a Slack channel or your choice. It's a top-notch way of coordinating around issues that need attention!
 
